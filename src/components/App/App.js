@@ -9,7 +9,13 @@ constructor(props){
   super(props);
 
   this.state = {
-     starList: [
+     newStar: {
+       name:'', 
+       diameter:''
+     },
+    
+    
+    starList: [
        {name:'Gacrux',
         diameter: '19,617,314.03 km'},
         {name: 'Hadar',
@@ -19,27 +25,54 @@ constructor(props){
       ], 
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleNameChange = this.handleNameChange.bind(this);
+    // this.handleDiameterChange = this.handleDiameterChange.bind(this);
+  this.handleClick = this.handleClick.bind(this);
+
 
 }
 
-  handleChange(event) {
-    console.log(event.target.value);
 
-    const name = event.target.name;
+// handleNameChange(event){
+//     this.setState({
+//       newStar: {
+//         ...this.state.newStar,
+//         name: event.target.value,
+//       }
+//     });
+// }
 
-    if (name === 'star') {
-      this.setState({ user: { ...this.state.starList, star: event.target.value } });
+//   handleDiameterChange(event) {
+//     this.setState({
+//       newStar: {
+//         ...this.state.newStar,
+//         diameter: event.target.value,
+//       }
+//     });
+//   }
+  
+handleChangeFor = propertyName => event => {
+  this.setState({
+    newStar: {
+      ...this.state.newStar,
+      [propertyName]: event.target.value,
     }
+  });
 
-    else {
-      console.log(event.target.value);
-      this.setState({ user: { ...this.state.starList, diameter: event.target.value } });
+}
 
-    }
-
-  }
-
+handleClick(){
+  console.log('clicked!');
+  this.setState({
+    newStar: {
+      name: '',
+      diameter: ''
+    },
+    starList: [...this.state.starList, this.state.newStar],
+  })
+  
+  
+}
 
   render() {
 
@@ -63,19 +96,19 @@ constructor(props){
     //   return (<li>{star}</li>);
     // })
 
-    const starListItemArray = this.state.starList.map( star => <p key={star}> {star.name} is {star.diameter} in diameter</p> );
+  
+    //const starListItemArray = this.state.starList.map( star => <p key={star}> {star.name} is {star.diameter} in diameter</p> );
 
     return (
+
+    
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <input name="star" onChange={this.handleChange} />
-        <input name="diameter" onChange={this.handleChange} />
+        <input value={this.state.newStar.name} onChange={this.handleChangeFor('name')} />
+        <input value={this.state.newStar.diameter} onChange={this.handleChangeFor('diameter')} />
+        <button onClick={this.handleClick}>Submit</button>
         <div>
-          <p>{this.state.starList.name} is {this.state.starList.diameter} in diameter</p>
-         {starListItemArray}
+          <p>The star {this.state.newStar.name} is {this.state.newStar.diameter} in diameter</p>
+          {this.state.starList.map( star => <p key={star.name}> The star {star.name} is {star.diameter} in diameter</p>)}
         </div>
       </div>
     );

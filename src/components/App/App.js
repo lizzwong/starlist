@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import CurrentNewStar from '../currentNewStar/currentNewStar';
 import StarList from '../starList/starList';
+import NewStarForm from '../newStarForm/newStarForm'
 
 
 class App extends Component {
@@ -74,7 +75,6 @@ handleSubmit(event) {
     starList: [...this.state.starList, this.state.newStar],
   })
   
-  
 }
 
   render() {
@@ -106,11 +106,14 @@ handleSubmit(event) {
 
     
       <div className="App">
-      <form onSubmit={this.handleSubmit}>
+      {/* <form onSubmit={this.handleSubmit}>
         <input value={this.state.newStar.name} onChange={this.handleChangeFor('name')} />
         <input value={this.state.newStar.diameter} onChange={this.handleChangeFor('diameter')} />
         <input type="submit" value="Submit New Star"/>
-      </form>
+      </form> */}
+
+          <NewStarForm newStar={this.state.newStar} handleChangeFor={this.handleChangeFor}  
+          handleSubmit={this.handleSubmit} />
           <CurrentNewStar newStar={this.state.newStar} />
           <StarList starList={this.state.starList} />
       </div>

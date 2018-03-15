@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import CurrentNewStar from '../currentNewStar/currentNewStar';
+import StarList from '../starList/starList';
 
 
 class App extends Component {
@@ -110,18 +111,8 @@ handleSubmit(event) {
         <input value={this.state.newStar.diameter} onChange={this.handleChangeFor('diameter')} />
         <input type="submit" value="Submit New Star"/>
       </form>
-
-
-        <div>
-          {/* <p>The star {this.state.newStar.name} is {this.state.newStar.diameter} in diameter</p> */}
-          <CurrentNewStar />
-        </div>
-
-
-
-        <div>
-          {this.state.starList.map( star => <p key={star.name}> The star {star.name} is {star.diameter} in diameter</p>)}
-        </div>
+          <CurrentNewStar newStar={this.state.newStar} />
+          <StarList starList={this.state.starList} />
       </div>
     );
   }

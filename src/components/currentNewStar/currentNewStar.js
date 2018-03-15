@@ -5,7 +5,7 @@ render(){
     return (
         <div>
            HELLO THINGS 
-            {/* <p>The star {this.state.newStar.name} is {this.state.newStar.diameter} in diameter</p> */}
+            <p>The star {this.props.newStar.name} is {this.props.newStar.diameter} in diameter</p> 
         </div>
     );
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import CurrentNewStar from '../currentNewStar/currentNewStar';
 
 
 class App extends Component {
@@ -27,7 +28,7 @@ constructor(props){
 
     // this.handleNameChange = this.handleNameChange.bind(this);
     // this.handleDiameterChange = this.handleDiameterChange.bind(this);
-  this.handleClick = this.handleClick.bind(this);
+  this.handleSubmit = this.handleSubmit.bind(this);
 
 
 }
@@ -61,9 +62,10 @@ handleChangeFor = propertyName => event => {
 
 }
 
-handleClick(){
-  console.log('clicked!');
-  this.setState({
+handleSubmit(event) {
+  console.log('entered');
+  event.preventDefault();
+    this.setState({
     newStar: {
       name: '',
       diameter: ''
@@ -103,11 +105,21 @@ handleClick(){
 
     
       <div className="App">
+      <form onSubmit={this.handleSubmit}>
         <input value={this.state.newStar.name} onChange={this.handleChangeFor('name')} />
         <input value={this.state.newStar.diameter} onChange={this.handleChangeFor('diameter')} />
-        <button onClick={this.handleClick}>Submit</button>
+        <input type="submit" value="Submit New Star"/>
+      </form>
+
+
         <div>
-          <p>The star {this.state.newStar.name} is {this.state.newStar.diameter} in diameter</p>
+          {/* <p>The star {this.state.newStar.name} is {this.state.newStar.diameter} in diameter</p> */}
+          <CurrentNewStar />
+        </div>
+
+
+
+        <div>
           {this.state.starList.map( star => <p key={star.name}> The star {star.name} is {star.diameter} in diameter</p>)}
         </div>
       </div>
